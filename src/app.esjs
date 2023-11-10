@@ -2,28 +2,19 @@ import { Terminal } from "@es-js/terminal"
 import { obtenerJson } from "https://cdn.esjs.dev/MYewdgzgLgBCBGUCmYkCcBSFwwLwwEMIBLMYNcEGAMwFczicAKWtAGwEoYBvAKBhihIsNEggAHWmKgE8MMePQE0NJFGAALFuw78YoqCDRhl8iUpWiJU6AQB0AK2xgmugL69eSAB7ijMlW44RBR0LBwPIA"
 import cryptojs from "https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/+esm"
 
-let CONTRASEÑA_MD5 = "Ing.Notario"
-
+let CONTRASEÑA_MD5 = "UNAS GANAS DE VOOOOOS!"
 
 function calcularMd5(cadena) {
   return cryptojs.MD5(String(cadena)).toString()
 }
-
-async function obtenerCotizacion() {
-const dolarBlue = await obtenerJson('https://dolarapi.com/v1/dolares/blue')
-
-Terminal.log("* Precio de compra actual:  $" + dolarBlue.compra);
-Terminal.log("* Precio de venta actual:  $" + dolarBlue.venta)
-Terminal.log("* Promedio de los precios de compra y venta:  $" + (dolarBlue.compra*dolarBlue.venta)/2 )
-Terminal.log("* Fecha de la cotización:  " + dolarBlue.fechaActualizacion)
-}
+let vari = calcularMd5(CONTRASEÑA_MD5)
+console.log(vari)
 async function inicio() {
-  const contraseñaIngresada = prompt("Ingresa tu contraseña:"); 
-  if (calcularMd5(contraseñaIngresada) === calcularMd5(CONTRASEÑA_MD5)) {
+   const contraseñaIngresada = prompt("Ingresa tu contraseña:");  
+   if (contraseñaIngresada === calcularMd5(CONTRASEÑA_MD5)) {
     Terminal.log("Contraseña correcta. Acceso concedido.");
-    //mostramos datos del dolar
-    await obtenerCotizacion();
-    
+    Terminal.log("El hash signigica:",CONTRASEÑA_MD5);
+
   } else {
     Terminal.log("Contraseña incorrecta. Acceso denegado.");
   }
